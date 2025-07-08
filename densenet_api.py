@@ -8,7 +8,7 @@ from tensorflow.keras.applications.densenet import preprocess_input
 from werkzeug.utils import secure_filename
 
 # ---------------- Load Model ---------------- #
-model = load_model("densenet_video_classifier.h5")
+model = load_model("models/densenet_video_classifier.h5")
 
 # ---------------- Flask App ---------------- #
 app = Flask(__name__)

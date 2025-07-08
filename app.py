@@ -12,7 +12,7 @@ from tensorflow.keras.preprocessing.image import img_to_array
 app = Flask(__name__)
 
 # =================== LOAD MODELS ===================
-svm_model = joblib.load("resnet50model.pkl")
+svm_model = joblib.load("models/resnet50model.pkl")
 resnet = ResNet50(weights="imagenet", include_top=False, pooling='avg', input_shape=(224, 224, 3))
 
 # =================== FEATURE EXTRACTOR ===================
