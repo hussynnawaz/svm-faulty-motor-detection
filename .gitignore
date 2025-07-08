@@ -1,0 +1,7 @@
+.venv
+Abnormal/
+Normal/
+results/
+media/
+ffmpeg/
+*.h5
