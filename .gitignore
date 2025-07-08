@@ -1,6 +1,12 @@
 .venv
 Abnormal/
 Normal/
+<<<<<<< HEAD
 results/
 media/
 ffmpeg/
+=======
+media/
+ffmpeg/
+*.zip
+>>>>>>> 33df788 (Results Added)
