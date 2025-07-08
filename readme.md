@@ -18,7 +18,8 @@ This project provides a Flask-based API for detecting abnormal (faulty) and norm
 
 2. **Install dependencies:**
    ```powershell
-   pip install -r requirements.txtpython densenet_api.py
+   pip install -r requirements.txt
+   python app.py
    import requests
 
 url = "http://localhost:5000/predict"
