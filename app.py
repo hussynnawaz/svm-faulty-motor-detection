@@ -1,11 +1,8 @@
 # =================== IMPORTS ===================
 import os
 import cv2
-<<<<<<< HEAD
-=======
 import json
 import uuid
->>>>>>> 33df788 (Results Added)
 import numpy as np
 import joblib
 from flask import Flask, request, jsonify
@@ -56,8 +53,6 @@ def extract_resnet_features_from_bytes(file_bytes, num_frames=5):
     features = resnet.predict(frames_array, verbose=0)
     return np.mean(features, axis=0).reshape(1, -1)
 
-<<<<<<< HEAD
-=======
 # =================== SAVE RESULT ===================
 def save_result_json(data, folder="results"):
     os.makedirs(folder, exist_ok=True)
@@ -66,7 +61,6 @@ def save_result_json(data, folder="results"):
     with open(path, "w") as f:
         json.dump(data, f, indent=2)
 
->>>>>>> 33df788 (Results Added)
 # =================== PREDICTION ENDPOINT ===================
 @app.route("/predict", methods=["POST"])
 def predict_video():
@@ -87,27 +81,10 @@ def predict_video():
         pred = svm_model.predict(feature)[0]
         label = "Normal" if pred == 0 else "Abnormal"
 
-<<<<<<< HEAD
-        # === Confidence/Probability ===
-=======
->>>>>>> 33df788 (Results Added)
         try:
             proba = svm_model.predict_proba(feature)[0][int(pred)]
         except:
             decision = svm_model.decision_function(feature)
-<<<<<<< HEAD
-            proba = 1 / (1 + np.exp(-decision))[0]  # sigmoid fallback
-
-        confidence = round(float(proba), 4)
-
-        return jsonify({
-            "prediction": int(pred),
-            "label": label,
-            "probability": round(float(proba), 4),
-            "confidence": confidence,
-            "filename": file.filename
-        })
-=======
             proba = 1 / (1 + np.exp(-decision))[0]
 
         confidence = round(float(proba), 4)
@@ -122,7 +99,6 @@ def predict_video():
 
         save_result_json(result)
         return jsonify(result)
->>>>>>> 33df788 (Results Added)
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
