@@ -7,6 +7,8 @@ from tensorflow.keras.preprocessing.image import img_to_array
 app = Flask(__name__)
 model = load_model("models/efficientnet_model.h5")
 
+os.makedirs("results", exist_ok=True)
+
 def extract_frames(file_bytes, num_frames=3):
     path = "temp_video.mp4"
     with open(path, "wb") as f: f.write(file_bytes)
@@ -38,11 +40,17 @@ def predict():
         label = "Abnormal" if avg_pred > 0.5 else "Normal"
         confidence = round(float(avg_pred if label == "Abnormal" else 1 - avg_pred), 4)
         result = {
+            "id": str(uuid.uuid4()),
             "prediction": int(avg_pred > 0.5),
             "label": label,
             "confidence": confidence,
             "filename": file.filename
         }
+
+        # Save result
+        with open(f"results/{result['id']}.json", "w") as f:
+            json.dump(result, f, indent=2)
+
         return jsonify(result)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
